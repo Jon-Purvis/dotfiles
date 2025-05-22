@@ -76,6 +76,7 @@ alias vi='nvim'
 alias vim='nvim'
 alias cat="batcat"
 alias c='clear'
+alias clearall='printf "\033c"'
 
 # -------------------- y() Wrapper for Yazi --------------------
 function y() {
