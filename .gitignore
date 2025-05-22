@@ -1,0 +1,9 @@
+*.swp
+*.lock
+*.tmp
+*.bak
+*.log
+lazy-lock.json
+.DS_Store
+.cache/
+plugged/
