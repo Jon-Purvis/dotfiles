@@ -74,7 +74,6 @@ alias tree='eza -T --icons'
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
-alias cat="batcat"
 alias c='clear'
 alias clearall='printf "\033c"'
 
