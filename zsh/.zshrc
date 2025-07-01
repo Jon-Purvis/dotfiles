@@ -16,7 +16,7 @@ fi
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [ ! -d "$ZINIT_HOME" ]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
+  mkdir -p "$(dirname "$ZINIT_HOME")"
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
@@ -67,13 +67,9 @@ bindkey '^[[B' history-search-forward
 
 # -------------------- Aliases --------------------
 unalias zi 2>/dev/null
-alias cd='z'
 alias v='nvim'
 alias ls='eza --icons'
 alias tree='eza -T --icons'
-alias v='nvim'
-alias vi='nvim'
-alias vim='nvim'
 alias c='clear'
 alias clearall='printf "\033c"'
 
@@ -86,43 +82,33 @@ function y() {
   rm -f -- "$tmp"
 }
 
+# ---
+# Ensure your custom built binaries are found first
+# -------------------- Custom Binaries PATH Setup --------------------
+export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+
 # -------------------- Shell Integrations --------------------
 
 # ---- FZF (required) ----
-if ! command -v fzf &>/dev/null; then
-  echo "❌ ERROR: fzf not found." >&2
-  return 1
-fi
-
-if $IS_LINUX; then
-  # Typical path for fzf keybindings installed via apt/pacman
-  if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-  else
-    echo "⚠️ WARNING: fzf key bindings not found at /usr/share/doc/fzf/examples/key-bindings.zsh" >&2
-  fi
-elif $IS_MACOS; then
+if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
+else
+  echo "❌ ERROR: fzf not found in PATH. Please ensure it's installed and accessible." >&2
+  # return 1
 fi
 
 # ---- Zoxide (required) ----
-if ! command -v zoxide &>/dev/null; then
-  echo "❌ ERROR: zoxide not found" >&2
-  return 1
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+else
+  echo "❌ ERROR: zoxide not found in PATH. Please ensure it's installed and accessible." >&2
+  # return 1
 fi
-eval "$(zoxide init zsh)"
 
 # -------------------- Platform-Specific Config --------------------
 if $IS_LINUX; then
-  if [[ -f /opt/ros/humble/setup.zsh ]]; then
-    source /opt/ros/humble/setup.zsh
-  else
-    echo "⚠️ WARNING: /opt/ros/humble/setup.zsh not found. Is ROS 2 Humble installed?" >&2
-  fi
   export PATH="/snap/node/current/bin:$PATH"
 elif $IS_MACOS; then
   export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
 fi
-
-# -------------------- Final PATH Setup --------------------
-export PATH="$HOME/Applications:$HOME/.local/bin:$HOME/bin:$PATH"

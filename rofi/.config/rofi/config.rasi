@@ -3,7 +3,7 @@
 configuration {
     /*	modes: "window,drun,run,ssh";*/
     font: "FiraCode Nerd Font Mono 18";
-    dpi: 192;
+    // dpi: 96;
     // combi-hide-mode-prefix: false;
     /*	location: 0;*/
     /*	yoffset: 0;*/
@@ -195,7 +195,8 @@ configuration {
 }
 
 window {
-    width: 2000px;
+    width: 1000px;
+    // width: 2000px;
     background-color: #202020;
     border:           8;
     padding:          12px;
