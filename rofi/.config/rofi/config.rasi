@@ -3,6 +3,7 @@
 configuration {
     /*	modes: "window,drun,run,ssh";*/
     font: "FiraCode Nerd Font Mono 18";
+    combi-modes: "window,run,drun";
     // dpi: 96;
     // combi-hide-mode-prefix: false;
     /*	location: 0;*/
@@ -37,7 +38,6 @@ configuration {
     /*	auto-select: false;*/
     /*	parse-hosts: false;*/
     /*	parse-known-hosts: true;*/
-    /*	combi-modes: "window,run";*/
     /*	matching: "normal";*/
     /*	tokenize: true;*/
     /*	m: "-5";*/

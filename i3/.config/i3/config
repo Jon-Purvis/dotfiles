@@ -25,8 +25,11 @@ assign [class="Spotify"]  $ws5
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 # bindsym $mod+space exec --no-startup-id dmenu_run
-bindsym $mod+space exec --no-startup-id rofi -show combi --window-title "run"
+# use this one if you want rofi to see open windows, GUIs, and binaries
+# bindsym $mod+space exec --no-startup-id rofi -show combi --window-title "run"
+bindsym $mod+space exec --no-startup-id rofi -show drun --window-title "launch"
 
+bindsym $mod+b exec --no-startup-id ~/bin/connect_airpods.sh
 
 # change focus
 bindsym $mod+h focus left
